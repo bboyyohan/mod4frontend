@@ -45,22 +45,27 @@ class Navbar extends React.Component {
               {/* <p>Modal body text goes here.</p> */}
               <form onSubmit={this.handleSubmit}>
                 <label>
-                Username:
+                Username
+                <br/>
                 <input type="text" name="username" value={this.state.value} onChange={this.handleChange} />
+                
                 </label>
+                <br/>
                 <label>
-                Password:
+                Password
+                <br/>
                 <input type="text" name="password" value={this.state.value} onChange={this.handleChange} />
-                <br></br>
                 </label>
+                <br/>
+
                 <input type="submit" value="Login" />
               </form>
             </Modal.Body>
 
-            <Modal.Footer>
+            {/* <Modal.Footer>
               <button variant="secondary" onClick={this.clickLogin}>Close</button>
               <button variant="primary">Save changes</button>
-            </Modal.Footer>
+            </Modal.Footer> */}
           </Modal>
         :
         <div></div>

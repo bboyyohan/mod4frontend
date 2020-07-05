@@ -7,7 +7,8 @@ class ContentContainer extends React.Component {
         super()
         this.state = {
             bulletType: [],
-            guns: []
+            guns: [],
+            gunsByCalibre: []
         }
     }
 
@@ -19,7 +20,7 @@ class ContentContainer extends React.Component {
     fetchGuns = () => {
         fetch('http://localhost:3000/guns')
         .then(res => res.json())
-        .then(allGunsData => this.setState ({guns: allGunsData}))
+        .then(allGunsData => this.setState({guns: allGunsData}))
     }
 
     fetchBulletType = () => {
@@ -28,10 +29,15 @@ class ContentContainer extends React.Component {
         }))
     }
 
+    calibreGuns = (calibre) => {
+        let filteredBulletArray = this.state.bulletType.filter(bulletType => bulletType.calibre === calibre)
+        return this.state.guns.filter(gun => gun.bullet_type_id === filteredBulletArray.id)
+    }
+
     render(){
         return(
-            <div>Hello World
-                <BallisticsCalculator guns={this.state.guns} bulletType={this.state.bulletType}/>
+            <div>
+                <BallisticsCalculator guns={this.calibreGuns()} bulletType={this.state.bulletType} calibreGuns={this.calibreGuns}/>
             </div>
         )
     }
