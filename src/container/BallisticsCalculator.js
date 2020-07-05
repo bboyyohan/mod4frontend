@@ -5,7 +5,7 @@ class BallisticsCalculator extends React.Component {
     render(){
         return(
             <div> 
-                <select>
+                <select name="calibre">
                     {this.props.bulletType.map(bullet => <option value={bullet.calibre}>{bullet.calibre}</option>)}
                 </select>
 

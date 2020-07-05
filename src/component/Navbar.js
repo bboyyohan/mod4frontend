@@ -6,16 +6,26 @@ class Navbar extends React.Component {
   constructor() {
     super()
     this.state = {
-      login: false 
+      login: false,
+      username: '',
+      password: ''
     }
   }
 
-  clickLogin = () => {
+  clickLogin = (e) => {
+    
     this.setState({
       login: !this.state.login
     })
 
     
+  }
+
+  handleChange = (e) => {
+    e.preventDefault()
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   render() {
@@ -25,30 +35,41 @@ class Navbar extends React.Component {
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-      
+        {this.state.login ? 
+          <Modal show={this.state.login} onHide={this.clickLogin}>
+            <Modal.Header closeButton>
+              <Modal.Title>Modal title</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+              {/* <p>Modal body text goes here.</p> */}
+              <form onSubmit={this.handleSubmit}>
+                <label>
+                Username:
+                <input type="text" name="username" value={this.state.value} onChange={this.handleChange} />
+                </label>
+                <label>
+                Password:
+                <input type="text" name="password" value={this.state.value} onChange={this.handleChange} />
+                <br></br>
+                </label>
+                <input type="submit" value="Login" />
+              </form>
+            </Modal.Body>
+
+            <Modal.Footer>
+              <button variant="secondary" onClick={this.clickLogin}>Close</button>
+              <button variant="primary">Save changes</button>
+            </Modal.Footer>
+          </Modal>
+        :
+        <div></div>
+        }
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-            <li className="nav-item" onClick={this.clickLogin}>
-              <a className="nav-link" href="#">Login 
+            <li className="nav-item" >
+              <a className="nav-link" href="#" onClick={this.clickLogin}>Login 
                 {/* <span className="sr-only"> */}
-                  {this.state.login ? 
-                    <Modal show={this.state.login}>
-                      <Modal.Header closeButton>
-                        <Modal.Title>Modal title</Modal.Title>
-                      </Modal.Header>
-
-                      <Modal.Body>
-                        <p>Modal body text goes here.</p>
-                      </Modal.Body>
-
-                      <Modal.Footer>
-                        <button variant="secondary">Close</button>
-                        <button variant="primary">Save changes</button>
-                      </Modal.Footer>
-                    </Modal>
-                  :
-                  <div></div>
-                  }
                   {/* </span> */}
               </a>
             </li>
