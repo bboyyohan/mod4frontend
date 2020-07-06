@@ -5,6 +5,9 @@ import {
     Route
   } from "react-router-dom";
 import Home from '../component/Home'
+import Account from './Account'
+import OwnedGuns from './OwnedGuns';
+import Guns from './Guns'
 
 
 
@@ -62,6 +65,18 @@ class ContentContainer extends React.Component {
             
                     <BallisticsCalculator guns={this.state.gunsByCalibre} bulletType={this.state.bulletType} calibreGuns={this.calibreGuns}/>
                 } />
+                <Route path="/account" render={() =>
+
+                    <Account />
+                }/>
+                <Route path="/owned_guns" render={() =>
+                    
+                    <OwnedGuns />
+                }/>
+
+                <Route path="/guns" render={() =>
+                    <Guns />
+                }/>
             </Switch>
         )
     }

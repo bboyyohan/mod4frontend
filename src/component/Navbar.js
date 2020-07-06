@@ -84,7 +84,9 @@ class Navbar extends React.Component {
               </a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Account</a>
+              <Link to="/account">
+                <div className="nav-link" href="#">Account</div>
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/calculator">
@@ -92,10 +94,14 @@ class Navbar extends React.Component {
               </Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Owned Guns</a>
+              <Link to="/owned_guns">
+                <div className="nav-link" href="#">Owned Guns</div>
+              </Link>            
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">All Guns</a>
+              <Link to="/guns">
+                <div className="nav-link" href="#">All Guns</div>
+              </Link>        
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">
