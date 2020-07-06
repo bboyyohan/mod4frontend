@@ -75,13 +75,9 @@ class Navbar extends React.Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
           <li className="nav-item" >
-            
               <Link to="/home">
                 <div className="nav-link">Home</div>
               </Link>
-      
-          
-
             </li>
             <li className="nav-item" >
               <a className="nav-link" href="#" onClick={this.clickLogin}>Login 
@@ -91,7 +87,9 @@ class Navbar extends React.Component {
               <a className="nav-link" href="#">Account</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Ballistics Calculator</a>
+              <Link to="/calculator">
+                <div className="nav-link">Ballistics Calculator</div>
+              </Link>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">Owned Guns</a>

@@ -5,6 +5,7 @@ import {
     Route,
     Link
   } from "react-router-dom";
+import Home from '../component/Home'
 
 
 class ContentContainer extends React.Component {
@@ -55,7 +56,11 @@ class ContentContainer extends React.Component {
             <Switch>
                 <Route exact path="/home" render={() =>
             
-                    <ContentContainer component={Home} />
+                    <Home />
+                } />
+                <Route exact path="/calculator" render={() =>
+            
+                    <BallisticsCalculator guns={this.state.gunsByCalibre} bulletType={this.state.bulletType} calibreGuns={this.calibreGuns}/>
                 } />
             </Switch>
         )
