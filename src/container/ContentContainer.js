@@ -1,5 +1,10 @@
 import React from 'react'
 import BallisticsCalculator from './BallisticsCalculator'
+import {
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 
 class ContentContainer extends React.Component {
@@ -41,9 +46,18 @@ class ContentContainer extends React.Component {
 
     render(){
         return(
-            <div>
-                <BallisticsCalculator guns={this.state.gunsByCalibre} bulletType={this.state.bulletType} calibreGuns={this.calibreGuns}/>
-            </div>
+            // <Switch >
+            //     <div>
+            //         <BallisticsCalculator guns={this.state.gunsByCalibre} bulletType={this.state.bulletType} calibreGuns={this.calibreGuns}/>
+                
+            //     </div>
+            // </Switch>
+            <Switch>
+                <Route exact path="/home" render={() =>
+            
+                    <ContentContainer component={Home} />
+                } />
+            </Switch>
         )
     }
 }

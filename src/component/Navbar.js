@@ -1,5 +1,7 @@
 import React from 'react'
 import Modal from "react-bootstrap/Modal"
+import {Link} from 'react-router-dom'
+
 
 
 class Navbar extends React.Component {
@@ -72,10 +74,17 @@ class Navbar extends React.Component {
         }
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
+          <li className="nav-item" >
+            
+              <Link to="/home">
+                <div className="nav-link">Home</div>
+              </Link>
+      
+          
+
+            </li>
             <li className="nav-item" >
               <a className="nav-link" href="#" onClick={this.clickLogin}>Login 
-                {/* <span className="sr-only"> */}
-                  {/* </span> */}
               </a>
             </li>
             <li className="nav-item">
