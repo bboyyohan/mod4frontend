@@ -23,6 +23,29 @@ class Navbar extends React.Component {
     
   }
 
+  login = (e) => {
+    e.preventDefault()
+    fetch('http://localhost:3000/api/v1/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ 
+        username: this.state.username,
+        password: this.state.password
+      })
+    }).then(res => res.json())
+    .then(data => {
+      if(data.error){
+        alert(data.message)
+      } else {
+        console.log(data)
+        this.props.currentUser(data.user_data)
+      }
+    })
+  }
+
   handleChange = (e) => {
     e.preventDefault()
     this.setState({
@@ -38,14 +61,14 @@ class Navbar extends React.Component {
           <span className="navbar-toggler-icon"></span>
         </button>
         {this.state.login ? 
-          <Modal show={this.state.login} onHide={this.clickLogin}>
+          <Modal show={this.state.login} onHide={this.clickLogin} >
             <Modal.Header closeButton>
               <Modal.Title>Modal title</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
               {/* <p>Modal body text goes here.</p> */}
-              <form onSubmit={this.handleSubmit}>
+              <form onSubmit={this.login}>
                 <label>
                 Username
                 <br/>
@@ -56,7 +79,7 @@ class Navbar extends React.Component {
                 <label>
                 Password
                 <br/>
-                <input type="text" name="password" value={this.state.value} onChange={this.handleChange} />
+                <input type="password" name="password" value={this.state.value} onChange={this.handleChange} />
                 </label>
                 <br/>
 
@@ -79,9 +102,10 @@ class Navbar extends React.Component {
               <div className="nav-link">Home</div>
             </Link>
             </li>
-            <li className="nav-item" >
-              <a className="nav-link" href="#" onClick={this.clickLogin}>Login 
-              </a>
+            <li className="nav-item">
+              <Link to="/">
+                <div className="nav-link" onClick={this.clickLogin}>Login</div>
+              </Link>
             </li>
             <li className="nav-item">
               <Link to="/account">

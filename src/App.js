@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Navbar from './component/Navbar'
 import ContentContainer from './container/ContentContainer'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Switch, Redirect} from 'react-router-dom'
 import Home from './component/Home'
 import BallisticsCalculator from './container/ContentContainer'
 import Account from './container/ContentContainer'
@@ -11,24 +11,38 @@ import Guns from './container/ContentContainer'
 
 
 
+
 class App extends React.Component{
+
+  state = {
+    currentUser: null
+    
+  }
+
+  currentUser = (user) => {
+    this.setState({currentUser: user})
+  }
+
+  
+
   render() {
     return(
       <div>
 
-        <Navbar />
+        <Navbar currentUser={this.currentUser}/>
         <Switch>
           <Route exact path="/" render={() =>
-      
-              <ContentContainer component={Home} />
-          } />
+
+          this.state.currentUser ? <Redirect to='/account'/> : <ContentContainer component={Home} /> 
+          }/>
           <Route path="/calculator" render={() =>
       
               <ContentContainer component={BallisticsCalculator} />
           } />
           <Route path="/account" render={() =>
 
-              <ContentContainer component={Account} />
+            this.state.currentUser ? <ContentContainer component={Account} currentUser={this.state.currentUser} guns={this.state.guns}/> : <Redirect to='/'/>
+              
           } />
 
           <Route path='/owned_guns' render={() =>
@@ -40,8 +54,9 @@ class App extends React.Component{
 
             <ContentContainer component={Guns} />
           } />
+
         </Switch>
-        {/* <ContentContainer /> */}
+        
         
       </div>
     )
