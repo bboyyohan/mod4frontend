@@ -1,5 +1,5 @@
 import React from 'react'
-import Calibre from './Calibre'
+import Calibre from '../component/Calibre'
 // import * as rho from '@mariuspopovici/rho'
 
 class BallisticsCalculator extends React.Component {

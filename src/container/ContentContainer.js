@@ -2,10 +2,10 @@ import React from 'react'
 import BallisticsCalculator from './BallisticsCalculator'
 import {
     Switch,
-    Route,
-    Link
+    Route
   } from "react-router-dom";
 import Home from '../component/Home'
+
 
 
 class ContentContainer extends React.Component {
@@ -54,11 +54,11 @@ class ContentContainer extends React.Component {
             //     </div>
             // </Switch>
             <Switch>
-                <Route exact path="/home" render={() =>
+                <Route exact path="/" render={() =>
             
                     <Home />
                 } />
-                <Route exact path="/calculator" render={() =>
+                <Route path="/calculator" render={() =>
             
                     <BallisticsCalculator guns={this.state.gunsByCalibre} bulletType={this.state.bulletType} calibreGuns={this.calibreGuns}/>
                 } />

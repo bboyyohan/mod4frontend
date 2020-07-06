@@ -75,9 +75,9 @@ class Navbar extends React.Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
           <li className="nav-item" >
-              <Link to="/home">
-                <div className="nav-link">Home</div>
-              </Link>
+            <Link to="/">
+              <div className="nav-link">Home</div>
+            </Link>
             </li>
             <li className="nav-item" >
               <a className="nav-link" href="#" onClick={this.clickLogin}>Login 
