@@ -15,6 +15,10 @@ class Guns extends React.Component {
         
     // }
 
+    handleClick = (e) => {
+        debugger
+    }
+
 
     render() {
         // debugger
@@ -31,6 +35,7 @@ class Guns extends React.Component {
                 
                     <Card.Footer className='footer'>
                         <small className="text-muted">{this.props.gunObj.barrel_length} inch barrel length</small>
+                        <button onClick={this.handleClick}> X </button>
                     </Card.Footer>
                 </Card.Body>
             </Card>

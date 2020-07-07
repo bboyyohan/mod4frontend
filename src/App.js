@@ -15,12 +15,14 @@ import Guns from './container/ContentContainer'
 class App extends React.Component{
 
   state = {
-    currentUser: null
+    currentUser: null,
+    ownedGuns: []
     
   }
 
-  currentUser = (user) => {
-    this.setState({currentUser: user})
+  currentUser = (user, guns) => {
+    this.setState({currentUser: user,
+    ownedGuns: guns })
   }
 
   
@@ -41,7 +43,7 @@ class App extends React.Component{
           } />
           <Route path="/account" render={() =>
 
-            this.state.currentUser ? <ContentContainer component={Account} currentUser={this.state.currentUser} guns={this.state.guns}/> : <Redirect to='/'/>
+            this.state.currentUser ? <ContentContainer component={Account} currentUser={this.state.currentUser} ownedGuns={this.state.ownedGuns}/> : <Redirect to='/'/>
               
           } />
 
