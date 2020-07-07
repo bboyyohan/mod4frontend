@@ -18,7 +18,9 @@ class Account extends React.Component {
         .then(data => {
             console.log(data)
             this.setState({ownedGuns: data})
+
         })
+        // debugger
     }
 
     
@@ -38,7 +40,7 @@ class Account extends React.Component {
                 </CardDeck>
                 
 
-            {/* <h1>All of the Guns you Own: {this.state.ownedGuns.map(gun => <Gun gunObj={gun} key={gun.id}/>)}</h1> */}
+            <h1>All of the Guns you Own: {this.state.ownedGuns.map(gun => <OwnedGuns ownedGunObj={gun} key={gun.id}/>)}</h1>
                 
                 
             </div>

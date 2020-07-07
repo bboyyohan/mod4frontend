@@ -5,15 +5,15 @@ import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 
 class Guns extends React.Component {
 
-    state = {
-        filteredGuns: []
-    }
+    // state = {
+    //     filteredGuns: []
+    // }
 
-    filteredGuns = (e) => {
+    // filteredGuns = (e) => {
         
-        this.setState({filteredGuns: [this.state.filteredGuns]})
+    //     this.setState({filteredGuns: [this.state.filteredGuns]})
         
-    }
+    // }
 
 
     render() {
