@@ -1,5 +1,6 @@
 import React from 'react'
 import Calibre from '../component/Calibre'
+import GraphicDisplay from './GraphicDisplay'
 // import * as rho from '@mariuspopovici/rho'
 
 class BallisticsCalculator extends React.Component {
@@ -181,6 +182,7 @@ class BallisticsCalculator extends React.Component {
                     <input type="Submit" value="Submit Calculations"/>
 
                 </form>
+                <GraphicDisplay/>
             </div>
 
         )
