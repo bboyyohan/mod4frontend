@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+.Guns-image {
+  height: 100px;
+  width: 100px;
+  padding-top: 20px
+}
+
+
+
+.footer {
+  position: relative;
+  margin-bottom: 0px; /* negative value of footer height */
+  height: 100px;
+  clear: both;
+  bottom: 0px
+} 
+
