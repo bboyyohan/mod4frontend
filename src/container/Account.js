@@ -43,7 +43,7 @@ class Account extends React.Component {
 
             <h1>All of the Guns you Own: </h1>
             <CardDeck>
-                {this.props.ownedGuns.map(gun => <Gun gunObj={gun} key={gun.id} />)}
+                {this.props.ownedGuns.map(gun => <Gun gunObj={gun} key={gun.id}> <button> X </button></Gun> )}
             </CardDeck>
                 
             </div>
