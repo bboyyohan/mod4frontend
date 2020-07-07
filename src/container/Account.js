@@ -4,9 +4,7 @@ import OwnedGuns from './OwnedGuns'
 import CardDeck from "react-bootstrap/CardDeck"
 
 class Account extends React.Component {
-    // state = {
-    //     ownedGuns: []
-    // }
+   
 
     // componentDidMount(){
     //     this.getGuns()
@@ -25,7 +23,10 @@ class Account extends React.Component {
     // }
 
     
-
+    removeGun = (e) => {
+        console.log(e)
+    }
+// if u have user id and gun id make fetch call, when you add the gun, if it already exists dont do it
     render(){
         
         
@@ -43,7 +44,7 @@ class Account extends React.Component {
 
             <h1>All of the Guns you Own: </h1>
             <CardDeck>
-                {this.props.ownedGuns.map(gun => <Gun gunObj={gun} key={gun.id}> <button> X </button></Gun> )}
+                {this.props.ownedGuns.map(gun => <Gun gunObj={gun} key={gun.id} deleteGuns={this.props.deleteGuns}/>)}
             </CardDeck>
                 
             </div>

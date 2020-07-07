@@ -67,7 +67,7 @@ class ContentContainer extends React.Component {
                 } />
                 <Route path="/account" render={() =>
 
-                    <Account currentUser={this.props.currentUser} guns={this.state.guns} ownedGuns={this.props.ownedGuns}/>
+                    <Account currentUser={this.props.currentUser} guns={this.state.guns} ownedGuns={this.props.ownedGuns} deleteGuns={this.props.deleteGuns}/>
                 }/>
                 <Route path="/owned_guns" render={() =>
                     
