@@ -15,13 +15,19 @@ class Guns extends React.Component {
         
     // }
 
-        handleClick = (delGun) => {
+        handleDelete = (delGun) => {
             // debugger
             // this.props.removeGun(delGun)
             // console.log(delGun)
             this.props.deleteGuns(delGun)
 
         }
+
+        // handleAdd = (addGun) => {
+        //     this.props.addGuns(addGun)
+        // }
+
+
 
 
     render() {
@@ -40,7 +46,8 @@ class Guns extends React.Component {
                     <Card.Footer className='footer'>
                         <small className="text-muted">{this.props.gunObj.barrel_length} inch barrel length</small>
                         {/* <button onClick={this.handleClick} value={this.props.gunObj.name}> X </button> */}
-                        <button onClick={() => this.handleClick(this.props.gunObj.id)} > X </button>
+                        <button onClick={() => this.props.addGuns(this.props.gunObj)} > ✓ </button>
+                        <button onClick={() => this.handleDelete(this.props.gunObj.id)} > X </button>
 
                     </Card.Footer>
                 </Card.Body>

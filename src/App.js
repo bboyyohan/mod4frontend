@@ -31,7 +31,34 @@ class App extends React.Component{
 
   // getUserOwnedGuns
 
-  
+  //addGun is gunObj
+  addGuns = (addGun) => {
+    // debugger
+    console.log("add")
+    console.log(addGun)
+    fetch("http://localhost:3000/user_owned_guns", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        user_id: this.state.currentUser.id,
+        gun_id: addGun.id
+        
+      })
+    }).then(res => res.json())
+    .then(uog => {
+      let updatedArr = [...this.state.user_owned_guns, uog]
+      let updatedOwned = [...this.state.ownedGuns, addGun]
+      this.setState({user_owned_guns: updatedArr, ownedGuns: updatedOwned})
+    })
+
+        // let updatedArr = [...this.state.user_owned_guns, uog]
+        // this.setState({user_owned_guns: updatedArr})
+      // })
+
+}
 
   deleteGuns = (delGun) => {
     let join_id = this.state.user_owned_guns.filter(gun => gun.gun_id === delGun && gun.user_id === this.state.currentUser.id)
@@ -61,7 +88,7 @@ class App extends React.Component{
           } />
           <Route path="/account" render={() =>
 
-            this.state.currentUser ? <ContentContainer component={Account} currentUser={this.state.currentUser} ownedGuns={this.state.ownedGuns} deleteGuns={this.deleteGuns}/> : <Redirect to='/'/>
+            this.state.currentUser ? <ContentContainer component={Account} currentUser={this.state.currentUser} ownedGuns={this.state.ownedGuns} deleteGuns={this.deleteGuns} addGuns={this.addGuns}/> : <Redirect to='/'/>
               
           } />
 
