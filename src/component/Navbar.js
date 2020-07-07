@@ -44,6 +44,7 @@ class Navbar extends React.Component {
         this.props.currentUser(data.user_data)
       }
     })
+    .then(() => this.setState({login: false, username: '', password: ''}))
   }
 
   handleChange = (e) => {
