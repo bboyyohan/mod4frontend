@@ -41,7 +41,7 @@ class ContentContainer extends React.Component {
     calibreGuns = (calibre) => {
         console.log(calibre)
         // debugger
-        let filteredBulletArray = this.state.bulletType.filter(bulletType => bulletType.calibre === calibre)
+        let filteredBulletArray = this.state.bulletType.filter(bulletType => bulletType.calibre === parseFloat(calibre))
         
         this.setState({
             gunsByCalibre: this.state.guns.filter(gun => gun.bullet_type_id === filteredBulletArray[0].id)

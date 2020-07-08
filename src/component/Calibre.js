@@ -7,7 +7,7 @@ class Calibre extends React.Component {
     render(){
         return(
             
-            <option value={this.props.bulletObj.calibre}> {this.props.bulletObj.calibre} </option>
+            <option value={parseFloat(this.props.bulletObj.calibre)}> {this.props.bulletObj.calibre} </option>
                
               
         
