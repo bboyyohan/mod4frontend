@@ -5,13 +5,26 @@ class GraphicDisplay extends React.Component {
 
     state ={
         brushRadius: 3,
-        lazyRadius: 0
+        lazyRadius: 0,
+        canvasWidth: 400,
+        canvasHeight: 400
+
+    }
+    
+
+    clearCanvas = () => {
+        // this.setState({
+        //     canvasWidth: 0,
+        //     canvasHeight: 0
+        // })
+        console.log("clear")
     }
 
     render(){
         return(
             <div> GraphicDisplay
-               <CanvasDraw lazyRadius={this.state.lazyRadius} brushRadius={this.state.brushRadius} onChange={() => console.log("onChange")} />
+               <CanvasDraw lazyRadius={this.state.lazyRadius} brushRadius={this.state.brushRadius} canvasWidth={this.state.canvasWidth} canvasHeight={this.state.canvasHeight} onChange={() => console.log("onChange")} />
+               <button type="button"  onClick={() => this.clearCanvas()}>Click</button>
             </div>
 
         )
@@ -19,6 +32,7 @@ class GraphicDisplay extends React.Component {
 }
 
 GraphicDisplay.defaultProps = {
+    
     onChange: null,
     loadTimeOffset: 5,
     lazyRadius: 30,

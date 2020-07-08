@@ -17,7 +17,7 @@ class App extends React.Component{
   state = {
     currentUser: null,
     ownedGuns: [],
-    user_owned_guns: []
+    user_owned_guns: [],
     // owned guns: [ b, c, d]
     // user_owned_guns: [1, 2, 3, 4]
     
@@ -28,6 +28,10 @@ class App extends React.Component{
     this.setState({currentUser: user,
     ownedGuns: guns, user_owned_guns: join })
   }
+
+  // gunsNotOwned = () => {
+    
+  // }
 
   // getUserOwnedGuns
 
@@ -51,6 +55,7 @@ class App extends React.Component{
     .then(uog => {
       let updatedArr = [...this.state.user_owned_guns, uog]
       let updatedOwned = [...this.state.ownedGuns, addGun]
+      
       this.setState({user_owned_guns: updatedArr, ownedGuns: updatedOwned})
     })
 

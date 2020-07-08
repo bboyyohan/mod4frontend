@@ -22,13 +22,14 @@ class Account extends React.Component {
     //     // debugger
     // }
 
-  
+    
     removeGun = (e) => {
         // console.log(e)
     }
 // if u have user id and gun id make fetch call, when you add the gun, if it already exists dont do it
     render(){
         
+        // let addButton = <Gun <button onClick={() => this.props.addGuns(this.props.gunObj)} > ✓ </button>
         
         return(
             <div>
@@ -38,14 +39,15 @@ class Account extends React.Component {
 
             <h1> All of the Guns: </h1>
                 <CardDeck>
-                    {this.props.guns.map(gun => <Gun gunObj={gun} key={gun.id}  addGuns={this.props.addGuns}/>)}
+                    {this.props.guns.map(gun => <Gun gunObj={gun} key={gun.id}  addGuns={this.props.addGuns} />)}
                 </CardDeck>
+                
                 
 
             <h1>All of the Guns you Own: </h1>
-            <CardDeck>
-                {this.props.ownedGuns.map(gun => <Gun gunObj={gun} key={gun.id} deleteGuns={this.props.deleteGuns} addGuns={this.props.addGuns}/>)}
-            </CardDeck>
+                <CardDeck>
+                    {this.props.ownedGuns.map(gun => <OwnedGuns gunObj={gun} key={gun.id} deleteGuns={this.props.deleteGuns}/>)}
+                </CardDeck>
                 
             </div>
         )

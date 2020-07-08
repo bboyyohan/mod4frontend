@@ -4,15 +4,24 @@ import CardDeck from "react-bootstrap/CardDeck"
 
 class OwnedGuns extends React.Component {
    
-    
-    render() {
-        let filteredGuns = this.props.allGuns.filter(gun => gun.id === this.props.ownedGunObj.gun_id)
-        return(
-            <div>Your Guns 
-                
-                
-            </div>
 
+
+    render() {
+        return(
+            <Card style={{ width: '18rem' }} >
+                <Card.Img variant="top" src={this.props.gunObj.image} />
+                <Card.Body>
+                <Card.Title>{this.props.gunObj.name}</Card.Title>
+                
+                    <Card.Footer className='footer'>
+                        <small className="text-muted">{this.props.gunObj.barrel_length} inch barrel length</small>
+                       
+                        <button onClick={() => this.props.deleteGuns(this.props.gunObj.id)} > X </button>
+
+                    </Card.Footer>
+                </Card.Body>
+            </Card>
+            
            
         )
     }
