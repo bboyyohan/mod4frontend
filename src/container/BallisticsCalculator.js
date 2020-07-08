@@ -1,20 +1,82 @@
-import React from 'react'
-import Calibre from '../component/Calibre'
-// import * as rho from '@mariuspopovici/rho'
+import React from 'react';
+import Calibre from '../component/Calibre';
+import * as rho from '@mariuspopovici/rho';
+import * as integrate from 'integrate-adaptive-simpson';
+import * as nr from 'newton-raphson-method';
 
 class BallisticsCalculator extends React.Component {
     // Units are in metric
-    /*
-    calculations(initialMuzzleVelocity, initialHeight, angle) {
-     // These calculations ignore air resistance
-        const gravity = 9.81;
-        const seconds = quadraticEquationPositive(gravity, Math.sin(angle)*initialMuzzleVelocity, initialHeight);
-        const horizontalDistance = Math.cos(angle)*initialMuzzleVelocity;
-        return horizontalDistance;
-    }
-
-    quadraticEquationPostive(a, b, c) {
-        return (-1 * b + Math.sqrt(Math.pow(b, 2) - (4 * a * c))) / (2 * a);
+    // calculations originally from npm package 'projectile-motion-with-air-resistance'
+    // add these in (temp, dewPoint, altitude, initialHeight)
+    calculations() {
+      const gravity = 9.81;
+      const crossSectionalArea = Math.pow(this.state.calibre / 2, 2) * Math.PI;
+      const airDensity = this.airDensity(this.state.temp, this.state.dewPoint, this.state.altitude);
+    
+      // Initial position and launch velocity
+      const x_0 = 0.0;
+      const initialHorizontalVelocity = this.state.muzzleVelocity * Math.cos(this.state.shootingAngle); // horizontal velocity
+      const y_0 = this.state.initialHeight;
+      const initialVerticalVelocity = this.state.muzzleVelocity * Math.sin(this.state.shootingAngle); // vertical velocity
+    
+      // Constants and function definitions for solution
+      const airDensityConstants = (0.5 * this.state.dragCoefficient * airDensity * crossSectionalArea) / this.state.bulletWeight;
+      const Q_0 = Math.asinh(initialVerticalVelocity / initialHorizontalVelocity);
+      const A =
+        gravity / (airDensityConstants * initialHorizontalVelocity ** 2.0) +
+        (Q_0 + 0.5 * Math.sinh(2.0 * Q_0));
+    
+      const lam = (Q) => {
+        return A - (Q + 0.5 * Math.sinh(2.0 * Q));
+      };
+    
+      const u_s = (Q) => {
+        return Math.sqrt(gravity / airDensityConstants) / Math.sqrt(lam(Q));
+      };
+      const v_s = (Q) => {
+        return (
+          (Math.sqrt(gravity / airDensityConstants) * Math.sinh(Q)) /
+          Math.sqrt(lam(Q))
+        );
+      };
+      const f_t = (Q) => {
+        // time function
+        return Math.cosh(Q) / Math.sqrt(lam(Q));
+      };
+      const f_x = (Q) => {
+        // x function
+        return Math.cosh(Q) / lam(Q);
+      };
+      const f_y = (Q) => {
+        // y function
+        return Math.sinh(2.0 * Q) / lam(Q);
+      };
+    
+      const t_s = (Q) => {
+        return -integrate(f_t, Q_0, Q) / Math.sqrt(gravity * airDensityConstants);
+      };
+      const x_s = (Q) => {
+        return x_0 - integrate(f_x, Q_0, Q) / airDensityConstants;
+      };
+      const y_s = (Q) => {
+        return y_0 - integrate(f_y, Q_0, Q) / (2.0 * airDensityConstants);
+      };
+      const y_s_p = (Q) => {
+        return (-(1.0 / (2.0 * airDensityConstants)) * Math.sinh(2.0 * Q)) / lam(Q);
+      };
+    
+      // Time of flight
+      const Q_T_est = Math.asinh(-initialVerticalVelocity / initialHorizontalVelocity); // Initial estimate for Newton's method
+      const Q_T = nr(y_s, y_s_p, Q_T_est); //newton(y_s, Q_T_est, y_s_p);
+      const timeOfFlight = t_s(Q_T);
+    
+      // Horizontal range
+      const horizontalRange = x_s(Q_T);
+    
+      // Maximum height
+      const maximumHeight = y_s(0.0);
+    
+      return { maximumHeight, horizontalRange, timeOfFlight };
     }
 
     airDensity(temp, dewPoint, altitude) {
@@ -22,8 +84,6 @@ class BallisticsCalculator extends React.Component {
         return rho(temp, seaLvlAirPressure, dewPoint, 'metric', altitude);
     }
 
-    
-    */
     windSpeed = (e) => {
         this.setState({windDirection: e.target.name, selectedOption: e.target.value})
         if (e.target.name === 'windLeft'){
@@ -36,9 +96,9 @@ class BallisticsCalculator extends React.Component {
     constructor() {
         super()
         this.state = {
-            calibre: "",
-            bulletWeight: 0,
-            muzzleVelocity: 0,
+            calibre: 0, // meters
+            bulletWeight: 0, // kg
+            muzzleVelocity: 0, // m/s
             barrelLength: 0,
             ballisticCoefficient: 0,
             dragCoefficient: 0,
@@ -46,12 +106,15 @@ class BallisticsCalculator extends React.Component {
             windMPS: 0,
             windDirection: '',
             selectedOption: "option1",
-            shootingAngle: 0,
-            shootingRange: 0
+            shootingAngle: 0, // radians
+            shootingRange: 0,
+            temp: 0, // celcius
+            dewPoint: 0, // celcius
+            initialHeight: 0, // meters; this can also be used for drop on the minigame
+            altitude, // meters
         }
     }
 
-    
     selectHandler = (e) => {
         this.setState({
             calibre: e.target.value
