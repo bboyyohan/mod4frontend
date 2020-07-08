@@ -112,7 +112,7 @@ class BallisticsCalculator extends React.Component {
             temp: 0, // celcius
             dewPoint: 0, // celcius
             initialHeight: 0, // meters; this can also be used for drop on the minigame
-            altitude, // meters
+            altitude: 0 // meters
         }
     }
 
