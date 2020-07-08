@@ -54,10 +54,22 @@
   height: 100px;
   clear: both;
   bottom: 0px
-} 
- */
+}  */
+ 
 
  /* negative value of footer height margin-bottom */
+
+.image-hole {
+  position: absolute;
+  z-index: 2;
+  color: red;
+  height: 3px;
+  width: 3px;
+  top: 1000px;
+  right: 300px;
+
+
+}
 
  .card-footer {
   bottom: 0px;

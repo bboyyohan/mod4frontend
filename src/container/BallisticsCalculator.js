@@ -4,6 +4,7 @@ import GraphicDisplay from './GraphicDisplay'
 import * as rho from '@mariuspopovici/rho';
 import * as integrate from 'integrate-adaptive-simpson';
 import * as nr from 'newton-raphson-method';
+import MiniGame from '../component/MiniGame'
 
 class BallisticsCalculator extends React.Component {
     // Units are in metric
@@ -336,6 +337,7 @@ class BallisticsCalculator extends React.Component {
                     Amount of inches (negative is left, positive is right) the projectile travelled overall.: {this.state.windMPS * 39.37 * this.state.timeOfFlight} inches.
                 </p>
                 {/* <GraphicDisplay/> */}
+                <MiniGame windspeed={this.state.windMPS} />
             </div>
 
         )
