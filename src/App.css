@@ -36,3 +36,41 @@
     transform: rotate(360deg);
   }
 }
+/* .Guns-image {
+  height: 100px;
+  width: 100px;
+  padding-top: 20px
+} */
+
+/* .card-title {
+  position: absolute;
+  top: 80px;
+  left: 16px;
+} */
+
+/* .footer {
+  position: relative;
+  margin-bottom: 0px; 
+  height: 100px;
+  clear: both;
+  bottom: 0px
+} 
+ */
+
+ /* negative value of footer height margin-bottom */
+
+ .card-footer {
+  bottom: 0px;
+  width: 100%;
+  left: 0px;
+  position: absolute;
+  padding: .75rem 1.25rem;
+  background-color: rgba(0,0,0,.03);
+  border-top: 1px solid rgba(0,0,0,.125);
+}
+
+.card-title {
+  margin-bottom: .75rem;
+  bottom: 70px;
+  position: absolute;
+}

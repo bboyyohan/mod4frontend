@@ -1,5 +1,6 @@
 import React from 'react';
 import Calibre from '../component/Calibre';
+import GraphicDisplay from './GraphicDisplay'
 import * as rho from '@mariuspopovici/rho';
 import * as integrate from 'integrate-adaptive-simpson';
 import * as nr from 'newton-raphson-method';
@@ -244,6 +245,7 @@ class BallisticsCalculator extends React.Component {
                     <input type="Submit" value="Submit Calculations"/>
 
                 </form>
+                <GraphicDisplay/>
             </div>
 
         )

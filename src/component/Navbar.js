@@ -41,9 +41,11 @@ class Navbar extends React.Component {
         alert(data.message)
       } else {
         console.log(data)
-        this.props.currentUser(data.user_data)
+        this.props.currentUser(data.user_data, data.user_guns, data.user_owned_guns)
+        //used to be data.user_data
       }
     })
+    .then(() => this.setState({login: false, username: '', password: ''}))
   }
 
   handleChange = (e) => {
