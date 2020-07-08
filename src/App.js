@@ -40,24 +40,25 @@ class App extends React.Component{
     // debugger
     console.log("add")
     console.log(addGun)
-    fetch("http://localhost:3000/user_owned_guns", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        user_id: this.state.currentUser.id,
-        gun_id: addGun.id
+    if (!this.state.user_owned_guns.find(uog => uog.gun_id === addGun.id && uog.user_id === this.state.currentUser.id)) {
+      fetch("http://localhost:3000/user_owned_guns", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_id: this.state.currentUser.id,
+          gun_id: addGun.id
+          
+        })
+      }).then(res => res.json())
+      .then(uog => {
+        let updatedArr = [...this.state.user_owned_guns, uog]
+        let updatedOwned = [...this.state.ownedGuns, addGun]
         
-      })
-    }).then(res => res.json())
-    .then(uog => {
-      let updatedArr = [...this.state.user_owned_guns, uog]
-      let updatedOwned = [...this.state.ownedGuns, addGun]
-      
-      this.setState({user_owned_guns: updatedArr, ownedGuns: updatedOwned})
-    })
+        this.setState({user_owned_guns: updatedArr, ownedGuns: updatedOwned})
+      })}
 
         // let updatedArr = [...this.state.user_owned_guns, uog]
         // this.setState({user_owned_guns: updatedArr})
@@ -74,7 +75,7 @@ class App extends React.Component{
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       }
-    }).then(this.setState({ownedGuns: this.state.ownedGuns.filter(gun => gun.id !== delGun)}))
+    }).then(this.setState({ownedGuns: this.state.ownedGuns.filter(gun => gun.id !== delGun), user_owned_guns: this.state.user_owned_guns.filter(gun => gun.gun_id !== delGun && gun.user_id === this.state.currentUser.id)}))
   }
 
   render() {

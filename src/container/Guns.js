@@ -17,7 +17,7 @@ class Guns extends React.Component {
                 <Card.Title>{this.props.gunObj.name}</Card.Title>
                     <Card.Footer className='footer'>
                         <small className="text-muted">{this.props.gunObj.barrel_length} inch barrel length</small>
-                        <button onClick={() => this.props.addGuns(this.props.gunObj)} > ✓ </button>
+                        {this.props.gunTrue ? <button onClick={() => this.props.addGuns(this.props.gunObj)} > ✓ </button> : <button onClick={() => this.props.deleteGuns(this.props.gunObj.id)} > X </button>}
                     </Card.Footer>
                 </Card.Body>
             </Card>
