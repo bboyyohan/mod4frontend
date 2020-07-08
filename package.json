@@ -8,6 +8,8 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "bootstrap": "^4.5.0",
+    "integrate-adaptive-simpson": "^1.1.1",
+    "newton-raphson-method": "^1.0.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-canvas": "^1.3.0",
