@@ -120,14 +120,9 @@ class Navbar extends React.Component {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/owned_guns">
-                <div className="nav-link" href="#">Owned Guns</div>
+              <Link to="/mini_game">
+                <div className="nav-link" >Mini Game</div>
               </Link>            
-            </li>
-            <li className="nav-item">
-              <Link to="/guns">
-                <div className="nav-link" href="#">All Guns</div>
-              </Link>        
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">

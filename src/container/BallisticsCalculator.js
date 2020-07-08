@@ -10,30 +10,30 @@ class BallisticsCalculator extends React.Component {
     // calculations originally from npm package 'projectile-motion-with-air-resistance'
     // add these in (temp, dewPoint, altitude, initialHeight)
     calculations = (e) => {
-        e.preventDefault()
-        // debugger
-        this.setState({
-            calibre: (this.state.calibre / 1000), // meters 
-            bulletWeight: (this.state.weight / 15432), // kg
-            muzzleVelocity: (this.state.muzzleVelocity / 3.281), // m/s
-            // barrelLength: this.state.barrelLength,
-            // ballisticCoefficient: 0,
-            dragCoefficient: 0.5, //
-            // windMPH: this.state.windMPH,
-            // windMPS: this.state.windMPS,
-            // windDirection: this.state.windDirection,
-            // selectedOption: "option1",
-            shootingAngle: ((this.state.shootingAngle) * Math.PI / 180), // radians 1° × π/180 = 0.01745rad
-            //shootingRange: 0
-            temp: (((this.state.temp - 32)) * 5/9), // celcius (70°F − 32) × 5/9 = 21.111°C
-            dewPoint: (((this.state.dewPoint - 32)) * 5/9), // celcius
-            initialHeight: (this.state.initialHeight /  3.281), // meters; this can also be used for drop on the minigame
-            altitude: (this.state.altitude /  3.281) // meters 
-            // maximumHeight: 0, 
-            // horizontalRange: 0, 
-            // timeOfFlight: 0 
+        // e.preventDefault()
+        // // debugger
+        // this.setState({
+        //     calibre: (this.state.calibre / 1000), // meters 
+        //     bulletWeight: (this.state.weight / 15432), // kg
+        //     muzzleVelocity: (this.state.muzzleVelocity / 3.281), // m/s
+        //     // barrelLength: this.state.barrelLength,
+        //     // ballisticCoefficient: 0,
+        //     dragCoefficient: 0.5, //
+        //     // windMPH: this.state.windMPH,
+        //     // windMPS: this.state.windMPS,
+        //     // windDirection: this.state.windDirection,
+        //     // selectedOption: "option1",
+        //     shootingAngle: ((this.state.shootingAngle) * Math.PI / 180), // radians 1° × π/180 = 0.01745rad
+        //     //shootingRange: 0
+        //     temp: (((this.state.temp - 32)) * 5/9), // celcius (70°F − 32) × 5/9 = 21.111°C
+        //     dewPoint: (((this.state.dewPoint - 32)) * 5/9), // celcius
+        //     initialHeight: (this.state.initialHeight /  3.281), // meters; this can also be used for drop on the minigame
+        //     altitude: (this.state.altitude /  3.281) // meters 
+        //     // maximumHeight: 0, 
+        //     // horizontalRange: 0, 
+        //     // timeOfFlight: 0 
 
-        })
+        // })
       const gravity = 9.81;
       const crossSectionalArea = Math.pow(this.state.calibre / 2, 2) * Math.PI;
       const airDensity = this.airDensity(this.state.temp, this.state.dewPoint, this.state.altitude);
@@ -77,8 +77,9 @@ class BallisticsCalculator extends React.Component {
         return Math.sinh(2.0 * Q) / lam(Q);
       };
     //Was there supposed to be a number between 'return' and '-' on line 57
+    // added u_s 
       const t_s = (Q) => {
-        return -integrate(f_t, Q_0, Q) / Math.sqrt(gravity * airDensityConstants);
+        return -1 * integrate(f_t, Q_0, Q) / Math.sqrt(gravity * airDensityConstants);
       };
       const x_s = (Q) => {
         return x_0 - integrate(f_x, Q_0, Q) / airDensityConstants;
@@ -103,6 +104,7 @@ class BallisticsCalculator extends React.Component {
     
 
     //   return { maximumHeight, horizontalRange, timeOfFlight };
+    // console.log(timeof)
       this.setState({maximumHeight: maximumHeight, horizontalRange: horizontalRange, timeOfFlight: timeOfFlight})
     }
 
@@ -180,17 +182,42 @@ class BallisticsCalculator extends React.Component {
         })
     }
 
-    // windChangeHandler = (e) => {
-    //     this.setState({
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
+    handleSubmit = (e) => {
+        e.preventDefault()
+        // debugger
+        this.setState({
+            calibre: (this.state.calibre / 1000), // meters 
+            bulletWeight: (this.state.weight / 15432), // kg
+            muzzleVelocity: (this.state.muzzleVelocity / 3.281), // m/s
+            // barrelLength: this.state.barrelLength,
+            // ballisticCoefficient: 0,
+            dragCoefficient: (this.state.dragCoefficient * 0.000703069), //
+            // windMPH: this.state.windMPH,
+            // windMPS: this.state.windMPS,
+            // windDirection: this.state.windDirection,
+            // selectedOption: "option1",
+            shootingAngle: ((this.state.shootingAngle) * Math.PI / 180), // radians 1° × π/180 = 0.01745rad
+            //shootingRange: 0
+            temp: (((this.state.temp - 32)) * 5/9), // celcius (70°F − 32) × 5/9 = 21.111°C
+            dewPoint: (((this.state.dewPoint - 32)) * 5/9), // celcius
+            initialHeight: (this.state.initialHeight /  3.281), // meters; this can also be used for drop on the minigame
+            altitude: (this.state.altitude /  3.281) // meters 
+            // maximumHeight: 0, 
+            // horizontalRange: 0, 
+            // timeOfFlight: 0 
 
+        })
+        this.calculations()
+    }
+
+   
+
+    //added handlesubmit instead of this.calculations
 
     render(){
         return(
             <div> 
-                <form onSubmit={this.calculations}>
+                <form onSubmit={this.handleSubmit}> 
                     <label> Calibre (numeric values only):
                         <br/>
                     <select onChange={this.selectHandler} type="number"> 
@@ -308,7 +335,7 @@ class BallisticsCalculator extends React.Component {
                     Direction wind flows (negative is left, positive is right) with distance: {this.state.windMPS * 39.37} inches.
                     Amount of inches (negative is left, positive is right) the projectile travelled overall.: {this.state.windMPS * 39.37 * this.state.timeOfFlight} inches.
                 </p>
-                <GraphicDisplay/>
+                {/* <GraphicDisplay/> */}
             </div>
 
         )

@@ -7,7 +7,8 @@ import {
 import Home from '../component/Home'
 import Account from './Account'
 // import OwnedGuns from './OwnedGuns';
-import Guns from './Guns'
+// import Guns from './Guns'
+import MiniGame from '../component/MiniGame'
 
 
 
@@ -70,14 +71,10 @@ class ContentContainer extends React.Component {
 
                     <Account currentUser={this.props.currentUser} guns={this.state.guns} ownedGuns={this.props.ownedGuns} deleteGuns={this.props.deleteGuns} addGuns={this.props.addGuns}/>
                 }/>
-                {/* <Route path="/owned_guns" render={() =>
-                    
-                    <OwnedGuns />
-                }/> */}
+                 <Route exact path="/mini_game" render={() =>
 
-                <Route path="/guns" render={() =>
-                    <Guns />
-                }/>
+                <MiniGame />
+                } />
             </Switch>
         )
     }

@@ -6,8 +6,7 @@ import {Route, Switch, Redirect} from 'react-router-dom'
 import Home from './component/Home'
 import BallisticsCalculator from './container/ContentContainer'
 import Account from './container/ContentContainer'
-import OwnedGuns from './container/ContentContainer'
-import Guns from './container/ContentContainer'
+import MiniGame from './component/MiniGame'
 
 
 
@@ -98,14 +97,9 @@ class App extends React.Component{
               
           } />
 
-          <Route path='/owned_guns' render={() =>
+          <Route path='/mini_game' render={() =>
             
-              <ContentContainer component={OwnedGuns} />
-          } />
-
-          <Route path='/guns' render={() =>
-
-            <ContentContainer component={Guns} />
+              <ContentContainer component={MiniGame} />
           } />
 
         </Switch>
