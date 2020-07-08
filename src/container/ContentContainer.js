@@ -6,7 +6,7 @@ import {
   } from "react-router-dom";
 import Home from '../component/Home'
 import Account from './Account'
-import OwnedGuns from './OwnedGuns';
+// import OwnedGuns from './OwnedGuns';
 import Guns from './Guns'
 
 
@@ -70,10 +70,10 @@ class ContentContainer extends React.Component {
 
                     <Account currentUser={this.props.currentUser} guns={this.state.guns} ownedGuns={this.props.ownedGuns} deleteGuns={this.props.deleteGuns} addGuns={this.props.addGuns}/>
                 }/>
-                <Route path="/owned_guns" render={() =>
+                {/* <Route path="/owned_guns" render={() =>
                     
                     <OwnedGuns />
-                }/>
+                }/> */}
 
                 <Route path="/guns" render={() =>
                     <Guns />

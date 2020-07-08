@@ -1,6 +1,6 @@
 import React from 'react'
 import Gun from './Guns'
-import OwnedGuns from './OwnedGuns'
+// import OwnedGuns from './OwnedGuns'
 import CardDeck from "react-bootstrap/CardDeck"
 
 class Account extends React.Component {

@@ -11,10 +11,11 @@ class BallisticsCalculator extends React.Component {
     // add these in (temp, dewPoint, altitude, initialHeight)
     calculations = (e) => {
         e.preventDefault()
+        // debugger
         this.setState({
             calibre: (this.state.calibre / 1000), // meters 
-            bulletWeight: (parseFloat(this.state.weight) / 15432), // kg
-            muzzleVelocity: (parseFloat(this.state.muzzleVelocity) / 3.281), // m/s
+            bulletWeight: (this.state.weight / 15432), // kg
+            muzzleVelocity: (this.state.muzzleVelocity / 3.281), // m/s
             // barrelLength: this.state.barrelLength,
             // ballisticCoefficient: 0,
             dragCoefficient: 0.5, //
@@ -22,10 +23,10 @@ class BallisticsCalculator extends React.Component {
             // windMPS: this.state.windMPS,
             // windDirection: this.state.windDirection,
             // selectedOption: "option1",
-            shootingAngle: (parseFloat(this.state.shootingAngle) * Math.PI / 180), // radians 1° × π/180 = 0.01745rad
+            shootingAngle: ((this.state.shootingAngle) * Math.PI / 180), // radians 1° × π/180 = 0.01745rad
             //shootingRange: 0
-            temp: ((parseFloat(this.state.temp - 32)) * 5/9), // celcius (70°F − 32) × 5/9 = 21.111°C
-            dewPoint: ((parseFloat(this.state.dewPoint - 32)) * 5/9), // celcius
+            temp: (((this.state.temp - 32)) * 5/9), // celcius (70°F − 32) × 5/9 = 21.111°C
+            dewPoint: (((this.state.dewPoint - 32)) * 5/9), // celcius
             initialHeight: (this.state.initialHeight /  3.281), // meters; this can also be used for drop on the minigame
             altitude: (this.state.altitude /  3.281) // meters 
             // maximumHeight: 0, 
@@ -145,11 +146,12 @@ class BallisticsCalculator extends React.Component {
     }
 
     selectHandler = (e) => {
+        // debugger
         this.setState({
             calibre: parseFloat(e.target.value)
         })
         // debugger
-        this.props.calibreGuns(parseFloat(e.target.value))
+        this.props.calibreGuns(e.target.value)
         let specificBullet = this.props.bulletType.filter(bullet => bullet.calibre === parseFloat(e.target.value))
         this.setMyState(specificBullet)
         
@@ -172,10 +174,17 @@ class BallisticsCalculator extends React.Component {
     }
 
     changeHandler = (e) => {
+        // debugger
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: parseFloat(e.target.value)
         })
     }
+
+    // windChangeHandler = (e) => {
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
 
     render(){
@@ -184,7 +193,7 @@ class BallisticsCalculator extends React.Component {
                 <form onSubmit={this.calculations}>
                     <label> Calibre (numeric values only):
                         <br/>
-                    <select onChange={this.selectHandler}>
+                    <select onChange={this.selectHandler} type="number"> 
                         <option>Choose a bullet type</option>
                         {this.props.bulletType.map(bullet => <Calibre bulletObj={bullet} key={bullet.id}/>)}
                     </select>
@@ -194,12 +203,12 @@ class BallisticsCalculator extends React.Component {
                     <br/>
                     <label>Weight:
                         <br/>
-                        <input placeholder='Weight' name='bulletWeight' onChange={this.changeHandler} value={this.state.bulletWeight}/>
+                        <input placeholder='Weight' name='bulletWeight' type="number" set="any" onChange={this.changeHandler} value={this.state.bulletWeight}/>
                     </label>
                     <br/>
                     <label>Muzzle Velocity:
                         <br/>
-                        <input placeholder='Muzzle Velocity' name='muzzleVelocity' onChange={this.changeHandler} value={this.state.muzzleVelocity}/>
+                        <input placeholder='Muzzle Velocity' name='muzzleVelocity' type="number" set="any" onChange={this.changeHandler} value={this.state.muzzleVelocity}/>
                     </label>
                     <br/>
                     {this.state.calibre 
@@ -212,7 +221,7 @@ class BallisticsCalculator extends React.Component {
                         <br/>
                         Barrel Length:
                         <br/>
-                        <input placeholder='Barrel Length' name='barrelLength' onChange={this.changeHandler} value={this.state.barrelLength}/>
+                        <input placeholder='Barrel Length' name='barrelLength' type="number" set="any" onChange={this.changeHandler} value={this.state.barrelLength}/>
                     </div>
                     :
                     <div></div>
@@ -230,7 +239,7 @@ class BallisticsCalculator extends React.Component {
 
                     <label>Drag Coefficient:
                         <br/>
-                        <input placeholder='Drag Coefficient' name='dragCoefficient' onChange={this.changeHandler} value={this.state.dragCoefficient}/>
+                        <input placeholder='Drag Coefficient' name='dragCoefficient' type="number" set="any" onChange={this.changeHandler} value={this.state.dragCoefficient}/>
                     </label>
 
                     
@@ -238,9 +247,9 @@ class BallisticsCalculator extends React.Component {
                     <div className="form-check">
                         <label>Wind:
                             <br/>
-                            <input placeholder='Wind mph' name='windMPH' onChange={this.changeHandler} value={this.state.windMPH}/>
+                            <input placeholder='Wind mph' name='windMPH' type="number" set="any" onChange={this.changeHandler} value={this.state.windMPH}/>
                             <br/>
-                            <input placeholder='Wind m/s' name='windMPS' onChange={this.changeHandler} value={this.state.windMPS}/>
+                            <input placeholder='Wind m/s' name='windMPS' type="number" set="any" onChange={this.changeHandler} value={this.state.windMPS}/>
                             <br/>
                             <label> left </label>
                             <br/>
@@ -255,25 +264,25 @@ class BallisticsCalculator extends React.Component {
                         <br/>
                         <label>Temp:
                             <br/>
-                                <input placeholder='Temperature in Fahrenheit' name='temp' onChange={this.changeHandler} value={this.state.temp}/>
+                                <input placeholder='Temperature in Fahrenheit' name='temp' type="number" set="any" onChange={this.changeHandler} value={this.state.temp}/>
                             <br/>
                         </label>
                         <br/>
                         <label>Dew Point:
                             <br/>
-                                <input placeholder='Dew Point Temperature in Fahrenheit' name='dewPoint' onChange={this.changeHandler} value={this.state.dewPoint}/>
+                                <input placeholder='Dew Point Temperature in Fahrenheit' name='dewPoint' type="number" set="any" onChange={this.changeHandler} value={this.state.dewPoint}/>
                             <br/>
                         </label>
                         <br/>
                         <label>Initial Height:
                             <br/>
-                                <input placeholder='Initial Height' name='initialHeight' onChange={this.changeHandler} value={this.state.initialHeight}/>
+                                <input placeholder='Initial Height' name='initialHeight' type="number" set="any" onChange={this.changeHandler} value={this.state.initialHeight}/>
                             <br/>
                         </label>
                         <br/>
                         <label>Altitude:
                             <br/>
-                                <input placeholder='Altitude' name='altitude' onChange={this.changeHandler} value={this.state.altitude}/>
+                                <input placeholder='Altitude' name='altitude' type="number" set="any" onChange={this.changeHandler} value={this.state.altitude}/>
                             <br/>
                         </label>
                     </div>
@@ -284,7 +293,7 @@ class BallisticsCalculator extends React.Component {
                     <br/>
                     <label> Shooting Angle: </label>
                     <br/>
-                        <input placeholder='Shooting Angle' name='shootingAngle' onChange={this.changeHandler} value={this.state.shootingAngle}/>
+                        <input placeholder='Shooting Angle' name='shootingAngle' type="number" set="any" onChange={this.changeHandler} value={this.state.shootingAngle}/>
                     <br/>
 
                     
