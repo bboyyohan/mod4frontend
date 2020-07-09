@@ -190,6 +190,11 @@ max-height: 500px;
 width: auto;
 max-width: 250px; */
 
-/* .hidden {
-  max-width:
-} */
+.hidden {
+  display: none;
+  height: 630px;
+  width: 630px;
+  /* background-position-x: left;
+  background-position-y: top; */
+}
+
