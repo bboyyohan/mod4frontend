@@ -65,7 +65,7 @@ class Navbar extends React.Component {
         {this.state.login ? 
           <Modal show={this.state.login} onHide={this.clickLogin} >
             <Modal.Header closeButton>
-              <Modal.Title>Modal title</Modal.Title>
+              <Modal.Title>Login</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>

@@ -13,6 +13,7 @@ import Dot from './Dot'
 class MiniGame extends React.Component {
 
     calc = (e) => {
+        e.persist()
         const g = 41.67 //  ((ft^.5)/s)
         const n = .5
         const fo = 0
@@ -27,16 +28,19 @@ class MiniGame extends React.Component {
 
 
         // convert mph to f/s... mi * 1.467, take travelTime * 1.467 * 6 * 60(pixel) * 12 = inches we traveled 
-        let inchesTraveled = travelTime * 1.467 * 6 * 120 * 12 
+        // let inchesT = travelTime * 1.467 * 6 * 12 
+        let inchesTraveled = 0
 
-        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? inchesTraveled = travelTime * 1.467 * 6 * 120 * 12 : inchesTraveled = travelTime * 1.467 * 6 * 60 * 12
+        //changed the turnary, used to be travelTime * 120 || * 60
+        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? inchesTraveled = travelTime * this.state.windMPH * 17.6 : inchesTraveled = travelTime * this.state.windMPH * 17.6
 
         // let drop = (((g / this.state.initialVel) / (( 1 / this.state.projectileHorizontalRange ) - (1/(fo - (.75 + .00006 * this.state.projectileHorizontalRange) * n * this.state.projectileHorizontalRange)))))
         let drop = (((g / this.state.initialVel) / (( 1 / this.state.projectileHorizontalRange ) - ( 1 / (fo - (3 * n * (this.state.projectileHorizontalRange ))) / 4))))
         // windmovement is.... 
 
         let windMovement = 0
-         this.state.confirmedWindDirection === 'windLeft' ?  windMovement = e.clientX - inchesTraveled  : windMovement = e.clientX + inchesTraveled
+        console.log(inchesTraveled, 'inches traveled')
+         this.state.confirmedWindDirection === 'windLeft' ?  windMovement = e.clientX - inchesTraveled * 60 : windMovement = e.clientX + inchesTraveled * 60
         //{this.state.confirmedWindDirection === 'windLeft' ? this.setState({trajectoryDropX: (e.clientX) - 60 * (this.state.windMPH * 17.6/* inches/second*/) * ((this.state.projectileHorizontalRange * 36/* range from yards to inches*/) / (this.state.initialVel * 12 /*inches per second*/))}) : this.setState({trajectoryDropX: (e.clientX) + 60 * (this.state.windMPH * 17.6/* inches/second*/) * ((this.state.projectileHorizontalRange * 36/* range from yards to inches*/) / (this.state.initialVel * 12 /*inches per second*/))})}
         this.setState({
             // projectileDrop: drop
@@ -47,10 +51,14 @@ class MiniGame extends React.Component {
                                                                              
         // fo -3(n * r)) / 4)
 
-        })
-        this.drawDot(e)
-        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? console.log(inchesTraveled / 120) : console.log(inchesTraveled / 60)
-        debugger
+        }, () => {
+            console.log('updated state', this.state.trajectoryDropX, this.state.trajectoryDropY)
+            this.drawDot(e)
+        } )
+        
+        // console.log(e.clientX, "Event e.clientX" , windMovement, "windmovement")
+        // this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? console.log(inchesTraveled / 120) : console.log(inchesTraveled / 60)
+        
     }
 
     // windSpeed = (e) => {
@@ -73,7 +81,7 @@ class MiniGame extends React.Component {
         trajectoryDropY: 0,
         draw: [],
         // windMPH: Math.floor(Math.random() * (9 - 0 + 1)) + 0,
-        windMPH: 30,
+        windMPH: 10,
         // 9 mph, takes max amount and min 
         windDirection: ['windLeft', 'windRight'],
         confirmedWindDirection: "",
@@ -86,7 +94,8 @@ class MiniGame extends React.Component {
     componentDidMount() {
         // 
         this.setState({ projectileHorizontalRange: this.state.distanceArray[Math.floor(Math.random() * this.state.distanceArray.length)],
-            confirmedWindDirection: this.state.windDirection[Math.floor(Math.random() * this.state.windDirection.length)]
+            // confirmedWindDirection: this.state.windDirection[Math.floor(Math.random() * this.state.windDirection.length)]
+            confirmedWindDirection: 'windRight'
         })
         const canvas = this.refs.canvas
         let ctx = canvas.getContext("2d")
@@ -103,12 +112,13 @@ class MiniGame extends React.Component {
     
     drawDot = (e) => {
         // 
-        
+        console.log(this.state.trajectoryDropX, "this.state.trajectorydropx", this.state.trajectoryDropY, "Y")
         let can = e.target
+        console.log(e, "e")
         let cntxt = can.getContext("2d")
         // 
         cntxt.font = "40px Courier"
-        cntxt.fillText(".", (e.clientX - 12), this.state.trajectoryDropY)
+        cntxt.fillText(".", this.state.trajectoryDropX, this.state.trajectoryDropY)
         // cntxt.fillText(".", (e.clientX - 12), (e.clientY - 54))
         
 
