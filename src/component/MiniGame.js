@@ -32,7 +32,7 @@ class MiniGame extends React.Component {
         let inchesTraveled = 0
 
         //changed the turnary, used to be travelTime * 120 || * 60
-        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? inchesTraveled = travelTime * this.state.windMPH * 17.6 : inchesTraveled = travelTime * this.state.windMPH * 17.6
+        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? inchesTraveled = travelTime * this.state.windMPH * 1.467 : inchesTraveled = travelTime * this.state.windMPH * 1.467
 
         // let drop = (((g / this.state.initialVel) / (( 1 / this.state.projectileHorizontalRange ) - (1/(fo - (.75 + .00006 * this.state.projectileHorizontalRange) * n * this.state.projectileHorizontalRange)))))
         let drop = (((g / this.state.initialVel) / (( 1 / this.state.projectileHorizontalRange ) - ( 1 / (fo - (3 * n * (this.state.projectileHorizontalRange ))) / 4))))
@@ -80,8 +80,7 @@ class MiniGame extends React.Component {
         trajectoryDropX: 0,
         trajectoryDropY: 0,
         draw: [],
-        // windMPH: Math.floor(Math.random() * (9 - 0 + 1)) + 0,
-        windMPH: 10,
+        windMPH: 0,
         // 9 mph, takes max amount and min 
         windDirection: ['windLeft', 'windRight'],
         confirmedWindDirection: "",
@@ -94,8 +93,9 @@ class MiniGame extends React.Component {
     componentDidMount() {
         // 
         this.setState({ projectileHorizontalRange: this.state.distanceArray[Math.floor(Math.random() * this.state.distanceArray.length)],
-            // confirmedWindDirection: this.state.windDirection[Math.floor(Math.random() * this.state.windDirection.length)]
-            confirmedWindDirection: 'windRight'
+            confirmedWindDirection: this.state.windDirection[Math.floor(Math.random() * this.state.windDirection.length)],
+            windMPH: Math.floor(Math.random() * (9 - 0 + 1)) + 0
+            // confirmedWindDirection: 'windRight'
         })
         const canvas = this.refs.canvas
         let ctx = canvas.getContext("2d")
