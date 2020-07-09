@@ -86,3 +86,110 @@
   bottom: 70px;
   position: absolute;
 }
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* .Guns-image {
+  height: 100px;
+  width: 100px;
+  padding-top: 20px
+} */
+
+/* .card-title {
+  position: absolute;
+  top: 80px;
+  left: 16px;
+} */
+
+/* .footer {
+  position: relative;
+  margin-bottom: 0px; 
+  height: 100px;
+  clear: both;
+  bottom: 0px
+} 
+ */
+
+ /* negative value of footer height margin-bottom */
+
+ .card-footer {
+  bottom: 0px;
+  width: 100%;
+  left: 0px;
+  position: absolute;
+  padding: .35rem 1.25rem;
+  background-color: rgba(0,0,0,.03);
+  border-top: 1px solid rgba(0,0,0,.125);
+}
+
+
+.card-title {
+  margin-bottom: .75rem;
+  bottom: 70px;
+  position: absolute;
+}
+
+.card {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+  height: auto;
+  max-height: 500px;
+  width: auto;
+  max-width: 250px;
+}
+
+/* what made the cards all the same size was... 
+
+height: auto;
+max-height: 500px;
+width: auto;
+max-width: 250px; */
+
+/* .hidden {
+  max-width:
+} */

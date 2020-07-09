@@ -29,14 +29,14 @@ class MiniGame extends React.Component {
         // console.log(e.clientY + 60 * drop)
     }
 
-    windSpeed = (e) => {
-        this.setState({confirmedWindDirection: e.target.name, selectedOption: e.target.value})
-        if (e.target.name === 'windLeft'){
-            this.setState({trajectoryDropX: -this.state.windMPH * 17.6})
-        } else if (e.target.name === 'windRight'){
-            this.setState({trajectoryDropX: this.state.windMPH * 17.6})
-        }
-    }
+    // windSpeed = (e) => {
+    //     this.setState({confirmedWindDirection: e.target.name, selectedOption: e.target.value})
+    //     if (e.target.name === 'windLeft'){
+    //         this.setState({trajectoryDropX: -this.state.windMPH * 17.6})
+    //     } else if (e.target.name === 'windRight'){
+    //         this.setState({trajectoryDropX: this.state.windMPH * 17.6})
+    //     }
+    // }
 
     state = {
         initialVel: 2000,
@@ -48,18 +48,42 @@ class MiniGame extends React.Component {
         windMPH: Math.floor(Math.random() * (40 - 0 + 1)) + 0,
         windDirection: ['windLeft', 'windRight'],
         confirmedWindDirection: '',
-        selectedOption: 'option1'
+        selectedOption: 'option1',
+        dot: "",
         
     }
 
 
     
     componentDidMount() {
-        this.setState({confirmedWindDirection: this.state.windDirection[Math.floor(Math.random() * this.state.windDirection.length)]})
+        // debugger
+        const canvas = this.refs.canvas
+        let ctx = canvas.getContext("2d")
+        let img = this.refs.image
+        // debugger
+        img.onload = () => {
+          ctx.drawImage(img, 0, 0)
+          ctx.font = "40px Courier"
+          ctx.fillText(this.state.dot, 210, 75)
+        }
+        // debugger
     }
+
     
+    drawDot = (e) => {
+        // console.log(e)
+        // debugger
+        let x = e.clientX
+        let y = e.clientY
+        let can = e.target
+        let cntxt = can.getContext("2d")
+        // debugger
+        cntxt.font = "40px Courier"
+        cntxt.fillText(".", x, y)
 
 
+    }
+      
     changeHandler = (e) => {
         // debugger
         this.setState({
@@ -69,44 +93,25 @@ class MiniGame extends React.Component {
 
 
     render() {
-        console.log(this.state.trajectoryDropX)
-        let canvas = ""
-        if (this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200) {
-            canvas = img1
-        } else if (this.state.projectileHorizontalRange === 300) {
-            canvas = img2
-        } else if (this.state.projectileHorizontalRange === 400) {
-            canvas = img3
-        } else {
-            canvas = img4
-        }
+        // console.log(this.state.trajectoryDropX)
+        // let canvas = ""
+        // if (this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200) {
+        //     canvas = img1
+        // } else if (this.state.projectileHorizontalRange === 300) {
+        //     canvas = img2
+        // } else if (this.state.projectileHorizontalRange === 400) {
+        //     canvas = img3
+        // } else {
+        //     canvas = img4
+        // }
 
         
         
         return(
             <div>
-                <canvas ref="canvas" width={600} height={600} />
-                {/* <img ref="image" src={img4} className="hidden" /> */}
-                <img onClick={this.calc} ref='image' width={630} height={630} src={canvas} className="hidden" /> 
-                {this.state.draw.map(image => <img className='image-hole'/>)}
-            
-                <label>Wind:
-                    <br/>
-                    <input placeholder='Wind mph' name='windMPH' type="number" set="any" onChange={this.changeHandler} value={this.state.windMPH}/>
-                    <br/>
-                    <input placeholder='Wind m/s' name='trajectoryDropX' type="number" set="any" onChange={this.changeHandler} value={this.state.trajectoryDropX}/>
-                    <br/>
-                    <label> left </label>
-                    <br/>
-                    <input name='windLeft' type="radio" className="form-check-input" value="option1" checked={this.state.selectedOption === "option1"}
-                        onClick={this.windSpeed}/>
-                    <br/>
-                    <label> right </label>
-                    <br/>
-                    <input name='windRight' type="radio" className="form-check-input" value="option2" checked={this.state.selectedOption === "option2"}
-                    onClick={this.windSpeed}/>
-                </label>
-               
+                           <canvas ref="canvas" width={640} height={425} onClick={this.drawDot}/>
+                            <img ref="image" src={img1} className="hidden" />
+  
             </div>
         )
     }
