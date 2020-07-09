@@ -337,7 +337,7 @@ class BallisticsCalculator extends React.Component {
                     Amount of inches (negative is left, positive is right) the projectile travelled overall.: {this.state.windMPS * 39.37 * this.state.timeOfFlight} inches.
                 </p>
                 {/* <GraphicDisplay/> */}
-                <MiniGame windspeed={this.state.windMPS} />
+                {/* <MiniGame windspeed={this.state.windMPS} /> */}
             </div>
 
         )
