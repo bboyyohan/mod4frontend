@@ -32,7 +32,7 @@ class MiniGame extends React.Component {
         let inchesTraveled = 0
 
         //changed the turnary, used to be travelTime * 120 || * 60
-        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? inchesTraveled = travelTime * this.state.windMPH * 1.467 : inchesTraveled = travelTime * this.state.windMPH * 1.467
+        this.state.projectileHorizontalRange === 100 || this.state.projectileHorizontalRange === 200 ? inchesTraveled = travelTime / this.state.windMPH * 1.467 * 12: inchesTraveled = travelTime / this.state.windMPH * 1.467 * 12
 
         // let drop = (((g / this.state.initialVel) / (( 1 / this.state.projectileHorizontalRange ) - (1/(fo - (.75 + .00006 * this.state.projectileHorizontalRange) * n * this.state.projectileHorizontalRange)))))
         let drop = (((g / this.state.initialVel) / (( 1 / this.state.projectileHorizontalRange ) - ( 1 / (fo - (3 * n * (this.state.projectileHorizontalRange ))) / 4))))
@@ -40,7 +40,7 @@ class MiniGame extends React.Component {
 
         let windMovement = 0
         console.log(inchesTraveled, 'inches traveled')
-         this.state.confirmedWindDirection === 'windLeft' ?  windMovement = e.clientX - inchesTraveled * 60 : windMovement = e.clientX + inchesTraveled * 60
+         this.state.confirmedWindDirection === 'windLeft' ?  windMovement = e.clientX - inchesTraveled * 120 : windMovement = e.clientX + inchesTraveled * 60
         //{this.state.confirmedWindDirection === 'windLeft' ? this.setState({trajectoryDropX: (e.clientX) - 60 * (this.state.windMPH * 17.6/* inches/second*/) * ((this.state.projectileHorizontalRange * 36/* range from yards to inches*/) / (this.state.initialVel * 12 /*inches per second*/))}) : this.setState({trajectoryDropX: (e.clientX) + 60 * (this.state.windMPH * 17.6/* inches/second*/) * ((this.state.projectileHorizontalRange * 36/* range from yards to inches*/) / (this.state.initialVel * 12 /*inches per second*/))})}
         this.setState({
             // projectileDrop: drop
